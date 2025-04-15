@@ -74,10 +74,10 @@
             android:layout_height="wrap_content"
             android:text="-"
             android:textSize="18dp"
-            app:layout_constraintBottom_toBottomOf="@+id/time_from_search"
-            app:layout_constraintEnd_toStartOf="@+id/time_to_search"
-            app:layout_constraintStart_toEndOf="@+id/time_from_search"
-            app:layout_constraintTop_toTopOf="@+id/time_from_search" />
+            app:layout_constraintBottom_toBottomOf="@+id/time_period_from_search"
+            app:layout_constraintEnd_toStartOf="@+id/time_period_to_search"
+            app:layout_constraintStart_toEndOf="@+id/time_period_from_search"
+            app:layout_constraintTop_toTopOf="@+id/time_period_from_search" />
 
         <TextView
             android:id="@+id/textView12"
@@ -94,10 +94,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
             android:backgroundTint="#459b42"
             android:text="Go!"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/clear_button"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
@@ -125,7 +124,7 @@
             app:layout_constraintTop_toTopOf="@+id/textView8" />
 
         <EditText
-            android:id="@+id/time_from_search"
+            android:id="@+id/time_period_from_search"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -143,18 +142,18 @@
             android:hint="Digital"
             android:inputType="text"
             app:layout_constraintBottom_toBottomOf="@+id/textView12"
-            app:layout_constraintStart_toStartOf="@+id/time_from_search"
+            app:layout_constraintStart_toStartOf="@+id/time_period_from_search"
             app:layout_constraintTop_toTopOf="@+id/textView12" />
 
         <EditText
-            android:id="@+id/time_to_search"
+            android:id="@+id/time_period_to_search"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="To"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="@+id/country_search"
-            app:layout_constraintTop_toTopOf="@+id/time_from_search" />
+            app:layout_constraintTop_toTopOf="@+id/time_period_from_search" />
 
         <Button
             android:id="@+id/clear_button"
@@ -163,12 +162,13 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="#868686"
+            android:onClick="clear_button_click"
             android:text="Clear"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/art_serach"
+            android:id="@+id/art_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
