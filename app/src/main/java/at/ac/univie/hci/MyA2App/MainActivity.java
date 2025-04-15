@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     public String time_period_to = "";
     public String medium = "";
 
-    private void call_api()
+    public void call_api()
     {
 
     }

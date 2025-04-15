@@ -69,9 +69,9 @@ public class FilterPopup
 				EditText medium_search = popup.findViewById(R.id.medium_search);
 				activity.medium = medium_search.getText().toString();
 
-				Snackbar.make(popup, "Searching...", Snackbar.LENGTH_SHORT).show();
-//				activity.call_api();
-//				popup.dismiss();
+				Snackbar.make(location, "Searching...", Snackbar.LENGTH_SHORT).show();
+				activity.call_api();
+				filter_popup.dismiss();
 			}
 		});
 	}
@@ -115,7 +115,7 @@ public class FilterPopup
 				InputMethodManager imm = (InputMethodManager)activity.getSystemService(activity.INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(popup.getWindowToken(), 0);
 
-				Snackbar.make(popup, "Filters have been cleared.", Snackbar.LENGTH_SHORT).show();
+				Snackbar.make(location, "Filters have been cleared.", Snackbar.LENGTH_SHORT).show();
 
 			}
 		});
