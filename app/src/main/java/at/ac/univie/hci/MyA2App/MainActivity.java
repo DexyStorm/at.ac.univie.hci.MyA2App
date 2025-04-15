@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String general_search = "";
-
+    
 
     public void filter_button_click(View view)
     {
