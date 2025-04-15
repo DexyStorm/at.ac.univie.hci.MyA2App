@@ -129,29 +129,29 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="From"
-            android:inputType="text"
+            android:inputType="number"
             app:layout_constraintBottom_toBottomOf="@+id/textView13"
             app:layout_constraintStart_toStartOf="@+id/country_search"
             app:layout_constraintTop_toTopOf="@+id/textView13" />
 
         <EditText
+            android:inputType="text"
             android:id="@+id/medium_search"
             android:layout_width="209dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Digital"
-            android:inputType="text"
             app:layout_constraintBottom_toBottomOf="@+id/textView12"
             app:layout_constraintStart_toStartOf="@+id/time_period_from_search"
             app:layout_constraintTop_toTopOf="@+id/textView12" />
 
         <EditText
+            android:inputType="number"
             android:id="@+id/time_period_to_search"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="To"
-            android:inputType="text"
             app:layout_constraintEnd_toEndOf="@+id/country_search"
             app:layout_constraintTop_toTopOf="@+id/time_period_from_search" />
 
