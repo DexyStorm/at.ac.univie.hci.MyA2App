@@ -1,7 +1,9 @@
 package at.ac.univie.hci.MyA2App;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +40,32 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
+
+
+        EditText general_search_field = findViewById(R.id.general_search);
+        general_search_field.setOnEditorActionListener(new TextView.OnEditorActionListener()
+        {
+            @Override
+            public boolean onEditorAction(TextView view, int actionId, KeyEvent event)
+            {
+                general_search = view.getText().toString();
+
+                Snackbar.make(view, "Searching...", Snackbar.LENGTH_SHORT).show();
+                //hides keybaord so that the snackbar can be visible
+                InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                call_api();
+
+                return true;
+
+            }
+        });
+
+
+
+
     }
 
     public String general_search = "";
@@ -50,13 +78,22 @@ public class MainActivity extends AppCompatActivity {
 
     public void call_api()
     {
+//        Log.i("ligma", general_search);
+
 
     }
 
-    public void filter_button_click(View view) {
+
+
+
+
+
+
+
+    public void filter_button_click(View view)
+    {
         FilterPopup popup = new FilterPopup(this);
         popup.show(view);
-
-
     }
+
 }
