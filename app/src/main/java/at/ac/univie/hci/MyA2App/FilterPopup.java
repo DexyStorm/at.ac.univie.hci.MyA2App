@@ -59,7 +59,7 @@ public class FilterPopup
 				EditText artist_search = popup.findViewById(R.id.artist_search);
 				activity.artist_name = artist_search.getText().toString();
 				EditText art_search = popup.findViewById(R.id.art_search);
-				activity.art_name = art_search.getText().toString();
+				activity.title = art_search.getText().toString();
 				EditText country_search = popup.findViewById(R.id.country_search);
 				activity.country = country_search.getText().toString();
 				EditText time_from_search = popup.findViewById(R.id.time_period_from_search);
@@ -70,7 +70,7 @@ public class FilterPopup
 				activity.medium = medium_search.getText().toString();
 
 				Snackbar.make(location, "Searching...", Snackbar.LENGTH_SHORT).show();
-				activity.call_api();
+				activity.search(false);
 				filter_popup.dismiss();
 			}
 		});
@@ -93,7 +93,7 @@ public class FilterPopup
 
 				EditText art_search = popup.findViewById(R.id.art_search);
 				art_search.setText("");
-				activity.art_name = "";
+				activity.title = "";
 
 				EditText country_search = popup.findViewById(R.id.country_search);
 				country_search.setText("");

@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 //hides keybaord so that the snackbar can be visible
                 InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                call_api();
+                search(true);
 
                 return true;
 
@@ -78,18 +78,71 @@ public class MainActivity extends AppCompatActivity {
 
     public String general_search = "";
     public String artist_name = "";
-    public String art_name = "";
+    public String title = "";
     public String country = "";
     public String time_period_from = "";
     public String time_period_to = "";
     public String medium = "";
 
 
+    public void search(boolean from_general)
+    {
+        String url = "https://api.artic.edu/api/v1/artworks";
 
-    public void call_api() {
+        if(from_general == true)
+        {
+            if(!general_search.isEmpty())
+            {
+                url = url + "/search?q=" + general_search;
+
+            }
+        }
+        else //from_general == false
+        {
+            url = url + "/search";
+
+            if(!artist_name.isEmpty())
+            {
+                url = url + "?[term][artist_title]=" + artist_name + "&";
+            }
+            if(!title.isEmpty())
+            {
+                url = url + "?[term][title]=" + title + "&";
+            }
+            if(!country.isEmpty())
+            {
+                url = url + "?[term][title]=" + country + "&";
+            }
+            if(!time_period_from.isEmpty())
+            {
+                url = url + "?[term][title]=" + time_period_from + "&";
+            }
+            if(!time_period_to.isEmpty())
+            {
+                url = url + "?[term][title]=" + time_period_to + "&";
+            }
+            if(!medium.isEmpty())
+            {
+                url = url + "?[term][title]=" + medium + "&";
+            }
+
+            //removes last "&"
+            if(url.substring(url.length() - 1).equals("&"))
+            {
+                url = url.substring(0, url.length() - 1);
+
+            }
+
+        }
+//        Log.d(url, url);
+        call_api(url);
+
+
+    }
+
+    public void call_api(String url) {
 
         OkHttpClient client = new OkHttpClient();
-        String url = "https://api.artic.edu/api/v1/artworks";
         Request request = new Request.Builder().url(url).build();
 
         client.newCall(request).enqueue(new Callback()
@@ -105,12 +158,12 @@ public class MainActivity extends AppCompatActivity {
             {
                 if(response.isSuccessful())
                 {
-//                    Log.d("succ", "succ");
+                    Log.d("succ", "succ");
 
                 }
                 else
                 {
-                    Log.d("fail2", "fail2");
+                    Log.d("fail2", response.message());
                 }
             }
         });
