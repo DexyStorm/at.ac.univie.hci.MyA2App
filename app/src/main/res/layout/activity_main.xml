@@ -27,18 +27,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:background="#0000"
             android:id="@+id/filter_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="20dp"
+            android:background="#0000"
             android:onClick="filter_button_click"
             android:scaleType="centerInside"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/magnifying_glass"
             app:layout_constraintStart_toEndOf="@+id/general_search"
             app:layout_constraintTop_toTopOf="@+id/magnifying_glass"
-            app:srcCompat="@drawable/filter_lines"
+            app:srcCompat="@drawable/filter_icon"
             tools:visibility="visible" />
 
         <ImageView
