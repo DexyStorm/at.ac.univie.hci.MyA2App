@@ -27,6 +27,14 @@ import android.view.inputmethod
         .InputMethodManager;
 import android.widget.Toast;
 
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,13 +84,41 @@ public class MainActivity extends AppCompatActivity {
     public String time_period_to = "";
     public String medium = "";
 
-    public void call_api()
-    {
-//        Log.i("ligma", general_search);
+
+
+    public void call_api() {
+
+        OkHttpClient client = new OkHttpClient();
+        String url = "https://api.artic.edu/api/v1/artworks";
+        Request request = new Request.Builder().url(url).build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e)
+            {
+                Log.d("fail1", "fail1");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response)
+            {
+                if(response.isSuccessful())
+                {
+//                    Log.d("succ", "succ");
+
+                }
+                else
+                {
+                    Log.d("fail2", "fail2");
+                }
+            }
+        });
+
+
 
 
     }
-
 
 
 
