@@ -168,7 +168,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/art_search"
+            android:id="@+id/title_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
