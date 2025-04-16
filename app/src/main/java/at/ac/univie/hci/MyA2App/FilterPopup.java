@@ -90,6 +90,9 @@ public class FilterPopup
 				EditText medium_search = popup.findViewById(R.id.medium_search);
 				activity.medium = medium_search.getText().toString();
 
+
+				InputMethodManager imm = (InputMethodManager)activity.getSystemService(activity.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(popup.getWindowToken(), 0);
 				Snackbar.make(location, "Searching...", Snackbar.LENGTH_SHORT).show();
 				activity.search(false);
 				filter_popup.dismiss();
