@@ -27,6 +27,9 @@ import android.view.inputmethod
         .InputMethodManager;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -52,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        //aus irgendeinem grund wird wenn man enter drueckt, dashier 2x ausgefuehrt
+        //ist scheinbar ein bug?
+        //sollte aber nicht wichtig sein, da es nur passiert wenn man enter auf der tastatur drueckt
+        //https://stackoverflow.com/questions/4513888/enter-key-on-edittext-hitting-onkey-twice
         EditText general_search_field = findViewById(R.id.general_search);
         general_search_field.setOnEditorActionListener(new TextView.OnEditorActionListener()
         {
@@ -60,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 general_search = view.getText().toString();
 
-                Snackbar.make(view, "Searching...", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(view, "Searching generally...", Snackbar.LENGTH_SHORT).show();
                 //hides keybaord so that the snackbar can be visible
                 InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
@@ -83,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
     public String time_period_from = "";
     public String time_period_to = "";
     public String medium = "";
+    public String alt_text = "";
+    public String date = "";
+    public String description = "";
 
 
     public void search(boolean from_general)
@@ -91,11 +101,8 @@ public class MainActivity extends AppCompatActivity {
 
         if(from_general == true)
         {
-            if(!general_search.isEmpty())
-            {
-                url = url + "/search?q=" + general_search;
+            url = url + "/search?q=" + general_search;
 
-            }
         }
         else //from_general == false
         {
@@ -136,14 +143,121 @@ public class MainActivity extends AppCompatActivity {
         }
 //        Log.d(url, url);
         call_api(url);
+        
+
+    }
+
+
+    public String get_artwork_id(JSONObject elem)
+    {
+        String id = elem.optString("id", "Untitled");
+        return id;
+    }
+
+    private void get_info_about_artwork(String id_url)
+    {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(id_url).build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e)
+            {
+                Log.d("fail3", "fail3");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response)
+            {
+                if(response.isSuccessful())
+                {
+                    Log.d("succ2", "response is succ2");
+                    try
+                    {
+                        String res = response.body().string();
+                        try
+                        {
+
+                            JSONObject json = new JSONObject(res);
+                            JSONObject artwork_data = json.getJSONObject("data");
+                            Log.d("artwork_data", artwork_data.toString());
+
+                            title = artwork_data.optString("title", "Untitled");
+                            if(title.equals("null"))
+                            {
+                                title = "Untitled";
+                            }
+                            artist_name = artwork_data.optString("artist_title", "Unknown Artist");
+                            if(artist_name.equals("null"))
+                            {
+                                artist_name = "Unknown Artist";
+                            }
+                            date = artwork_data.optString("date_display", "Unknown date");
+                            if(date.equals("null"))
+                            {
+                                date = "Unknown date";
+                            }
+                            medium = artwork_data.optString("medium_display", "Unknown medium");
+                            if(medium.equals("null"))
+                            {
+                                medium = "Unknown medium";
+                            }
+                            country = artwork_data.optString("place_of_origin", "Unknown origin");
+                            if(country.equals("null"))
+                            {
+                                country = "Unknown origin";
+                            }
+                            description = artwork_data.optString("description", "No Description");
+                            if(description.equals("null"))
+                            {
+                                description = "No Description";
+                            }
+                            Log.d("title", title);
+                            Log.d("artist_name", artist_name);
+                            Log.d("date", date);
+                            Log.d("medium", medium);
+                            Log.d("country", country);
+                            Log.d("description", description);
+
+
+
+                        }
+                        catch (Exception e)
+                        {
+                            Log.d("json error2", "failed to make json object or smthing like that idk");
+                        }
+
+                    }
+                    catch (IOException e)
+                    {
+                        Log.d("API error2", e.getMessage());
+                    }
+
+
+                }
+                else
+                {
+                    Log.d("fail3", response.message());
+                }
+            }
+        });
 
 
     }
 
-    public void call_api(String url) {
+
+
+
+
+
+    public void call_api(String url)
+    {
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(url).build();
+
+
 
         client.newCall(request).enqueue(new Callback()
         {
@@ -158,7 +272,49 @@ public class MainActivity extends AppCompatActivity {
             {
                 if(response.isSuccessful())
                 {
-                    Log.d("succ", "succ");
+                    Log.d("succ", "response is succ");
+                    try
+                    {
+                        String res = response.body().string();
+                        try
+                        {
+
+                            JSONObject json = new JSONObject(res);
+                            JSONArray data = json.getJSONArray("data");
+//                            Log.d("data", data.toString());
+
+
+                            for (int i = 0; i < data.length(); i = i + 1)
+                            {
+                                String artwork_id = get_artwork_id(data.getJSONObject(i));
+
+                                String id_url = "https://api.artic.edu/api/v1/artworks/" + artwork_id;
+//                                Log.d(id_url, id_url);
+                                get_info_about_artwork(id_url);
+
+
+
+                                //STOPPED HERE
+                                //SAVE RESPONSE IN LIST
+
+                            }
+
+
+
+
+
+                        }
+                        catch (Exception e)
+                        {
+                            Log.d("json error", "failed to make json object or smthing like that idk");
+                        }
+
+                    }
+                    catch (IOException e)
+                    {
+                        Log.d("API error", e.getMessage());
+                    }
+
 
                 }
                 else

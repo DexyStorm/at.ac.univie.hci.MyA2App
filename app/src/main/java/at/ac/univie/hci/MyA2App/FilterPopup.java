@@ -93,7 +93,7 @@ public class FilterPopup
 
 				InputMethodManager imm = (InputMethodManager)activity.getSystemService(activity.INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(popup.getWindowToken(), 0);
-				Snackbar.make(location, "Searching...", Snackbar.LENGTH_SHORT).show();
+				Snackbar.make(location, "Searching with Filters...", Snackbar.LENGTH_SHORT).show();
 				activity.search(false);
 				filter_popup.dismiss();
 			}
