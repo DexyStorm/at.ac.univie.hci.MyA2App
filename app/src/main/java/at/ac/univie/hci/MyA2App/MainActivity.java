@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -66,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView view, int actionId, KeyEvent event)
             {
+                if (event != null && event.getAction() != KeyEvent.ACTION_DOWN)
+                {
+                    return false;
+                }
+
+
                 general_search = view.getText().toString();
 
                 Snackbar.make(view, "Searching generally...", Snackbar.LENGTH_SHORT).show();
@@ -157,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-        Log.d("url", url);
+//        Log.d("url", url);
         call_api(url);
         
 
@@ -170,6 +177,27 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d("id", id);
         return id;
     }
+
+
+
+    private void save_artworks_in_list_view()
+    {
+        ListView l;
+        String artwork_title = "";
+
+        for(Artwork elem : artwork_list)
+        {
+            artwork_title = elem.title;
+            Log.d("artwork_title", artwork_title);
+        }
+
+
+
+
+
+    }
+
+
 
     private void get_info_about_artwork(String id_url)
     {
@@ -235,14 +263,16 @@ public class MainActivity extends AppCompatActivity {
                             {
                                 year = "Unknown year";
                             }
-                            Log.d("title", title);
-                            Log.d("artist_name", artist_name);
-                            Log.d("date", date);
-                            Log.d("medium", medium);
-                            Log.d("country", country);
-                            Log.d("description", description);
-                            Log.d("year", year);
+//                            Log.d("title", title);
+//                            Log.d("artist_name", artist_name);
+//                            Log.d("date", date);
+//                            Log.d("medium", medium);
+//                            Log.d("country", country);
+//                            Log.d("description", description);
+//                            Log.d("year", year);
                             save_artwork_in_array();
+
+                            save_artworks_in_list_view();
 
 
                         }
@@ -279,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        Log.d("ammount of artworks in artwork_list:", Integer.toString(artwork_list.size())); //WORKS
 
-        Log.d("artwork info from save_artwork_in_array", a.toString());
+//        Log.d("artwork info from save_artwork_in_array", a.toString());
     }
 
 
@@ -308,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
                     try
                     {
                         String res = response.body().string();
-                        Log.d("res", res);
+//                        Log.d("res", res);
                         try
                         {
 
@@ -316,7 +346,7 @@ public class MainActivity extends AppCompatActivity {
                             JSONArray data = json.getJSONArray("data");
 //                            Log.d("data", data.toString());
 
-                            Log.d("ammount of artworks", Integer.toString(data.length()));
+//                            Log.d("ammount of artworks", Integer.toString(data.length()));
 
                             for (int i = 0; i < data.length(); i = i + 1)
                             {
@@ -331,10 +361,7 @@ public class MainActivity extends AppCompatActivity {
 
                             }
 
-                            for (Artwork elem : artwork_list)
-                            {
-                                Log.d("artwork in artwork_list", elem.toString());
-                            }
+
 
 
 
