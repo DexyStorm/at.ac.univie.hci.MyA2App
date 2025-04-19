@@ -39,13 +39,13 @@ public class FilterPopup
 
 		//to retain the information from previous filtering
 		EditText artist_search = popup.findViewById(R.id.artist_search);
-		artist_search.setText(activity.artist_name);
+		artist_search.setText(activity.search_artist_name);
 
 		EditText art_search = popup.findViewById(R.id.title_search);
-		art_search.setText(activity.title);
+		art_search.setText(activity.search_title);
 
 		EditText country_search = popup.findViewById(R.id.country_search);
-		country_search.setText(activity.country);
+		country_search.setText(activity.search_country);
 
 		EditText time_from_search = popup.findViewById(R.id.time_period_from_search);
 		time_from_search.setText(activity.search_time_period_from);
@@ -54,7 +54,7 @@ public class FilterPopup
 		time_period_to_search.setText(activity.search_time_period_to);
 
 		EditText medium_search = popup.findViewById(R.id.medium_search);
-		medium_search.setText(activity.medium);
+		medium_search.setText(activity.search_medium);
 
 
 

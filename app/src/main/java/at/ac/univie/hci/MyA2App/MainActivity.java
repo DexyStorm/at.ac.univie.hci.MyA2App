@@ -29,10 +29,14 @@ import android.view.inputmethod
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -117,6 +121,169 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+    Response res;
+
+
+
+    private JSONArray first_response_success(String res)
+    {
+        try
+        {
+            JSONObject json = new JSONObject(res);
+            JSONArray data = json.getJSONArray("data");
+//            Log.d("data", data.toString());
+            return data;
+        }
+        catch (JSONException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private String get_artwork_id(JSONObject elem)
+    {
+        String id = elem.optString("id", "ERROR_NO_ID");
+        return id;
+    }
+
+    private ArrayList<String> get_artwork_ids(JSONArray data)
+    {
+        ArrayList<String> artwork_ids = new ArrayList<String>();
+        String artwork_id = "";
+
+        for (int i = 0; i < data.length(); i = i + 1)
+        {
+            try
+            {
+                artwork_id = get_artwork_id(data.getJSONObject(i));
+                artwork_ids.add(artwork_id);
+            }
+            catch (JSONException e)
+            {
+                throw new RuntimeException(e);
+            }
+
+            String id_url = "https://api.artic.edu/api/v1/artworks/" + artwork_id;
+            //Log.d(id_url, id_url);
+
+        }
+
+        /*
+        int i = 1;
+        for (String elem : artwork_ids)
+        {
+            Log.d("artwork_id number " + i + ":", elem);
+            i = i + 1;
+        }
+        */
+
+        return artwork_ids;
+
+    }
+
+
+    private void call_api_for_specific_id(String artwork_id)
+    {
+        String url = "https://api.artic.edu/api/v1/artworks/" + artwork_id;
+
+        OkHttpClient client2 = new OkHttpClient();
+        Request request2 = new Request.Builder().url(url).build();
+
+        client2.newCall(request2).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e)
+            {
+                Log.d("fail2", "fail2");
+            }
+
+
+            @Override
+            public void onResponse(Call call, Response response)
+            {
+
+                if (response.isSuccessful())
+                {
+
+
+                    Log.d("succ2", "succ2");
+
+                    try
+                    {
+                        Thread.sleep(100);
+
+                    }
+                    catch (Exception e)
+                    {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
+    }
+
+
+    public void call_api(String url)
+    {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(url).build();
+
+
+
+        client.newCall(request).enqueue(new Callback()
+        {
+
+            @Override
+            public void onFailure(Call call, IOException e)
+            {
+                Log.d("fail1", "fail1");
+            }
+
+
+            @Override
+            public void onResponse(Call call, Response response)
+            {
+
+                if(response.isSuccessful())
+                {
+
+                    Log.d("succ", "succ");
+
+                    try
+                    {
+                        res = response;
+
+
+                        JSONArray data = first_response_success(response.body().string());
+                        Log.d("data", data.toString()); //WORKS
+                        Log.d("ammount of artworks", Integer.toString(data.length())); //WORKS
+
+                        ArrayList<String> artwork_ids = get_artwork_ids(data);
+                        ArrayList<Artwork> artworks = new ArrayList<Artwork>();
+                        for(String id : artwork_ids)
+                        {
+                            call_api_for_specific_id(id);
+                        }
+
+
+
+                    }
+                    catch (IOException e)
+                    {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
+
+
+
+
+
+    }
+
     public void search(boolean from_general)
     {
         String url = "https://api.artic.edu/api/v1/artworks";
@@ -163,232 +330,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+
         }
+
+        url = url + "&limit=100";
 //        Log.d("url", url);
+
         call_api(url);
         
-
-    }
-
-
-    public String get_artwork_id(JSONObject elem)
-    {
-        String id = elem.optString("id", "Untitled");
-//        Log.d("id", id);
-        return id;
-    }
-
-
-
-    private void save_artworks_in_list_view()
-    {
-        ListView l;
-        String artwork_title = "";
-
-        for(Artwork elem : artwork_list)
-        {
-            artwork_title = elem.title;
-            Log.d("artwork_title", artwork_title);
-        }
-
-
-
-
-
-    }
-
-
-
-    private void get_info_about_artwork(String id_url)
-    {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(id_url).build();
-
-        client.newCall(request).enqueue(new Callback()
-        {
-            @Override
-            public void onFailure(Call call, IOException e)
-            {
-                Log.d("fail3", "fail3");
-            }
-
-            @Override
-            public void onResponse(Call call, Response response)
-            {
-                if(response.isSuccessful())
-                {
-                    Log.d("succ2", "response is succ2");
-                    try
-                    {
-                        String res = response.body().string();
-                        try
-                        {
-
-                            JSONObject json = new JSONObject(res);
-                            JSONObject artwork_data = json.getJSONObject("data");
-//                            Log.d("artwork_data", artwork_data.toString());
-
-                            title = artwork_data.optString("title", "Untitled");
-                            if(title.equals("null"))
-                            {
-                                title = "Untitled";
-                            }
-                            artist_name = artwork_data.optString("artist_title", "Unknown Artist");
-                            if(artist_name.equals("null"))
-                            {
-                                artist_name = "Unknown Artist";
-                            }
-                            date = artwork_data.optString("date_display", "Unknown date");
-                            if(date.equals("null"))
-                            {
-                                date = "Unknown date";
-                            }
-                            medium = artwork_data.optString("medium_display", "Unknown medium");
-                            if(medium.equals("null"))
-                            {
-                                medium = "Unknown medium";
-                            }
-                            country = artwork_data.optString("place_of_origin", "Unknown origin");
-                            if(search_country.equals("null"))
-                            {
-                                country = "Unknown origin";
-                            }
-                            description = artwork_data.optString("description", "No Description");
-                            if(description.equals("null"))
-                            {
-                                description = "No Description";
-                            }
-                            year = artwork_data.optString("date_display", "Unknown year");
-                            if(year.equals("null"))
-                            {
-                                year = "Unknown year";
-                            }
-//                            Log.d("title", title);
-//                            Log.d("artist_name", artist_name);
-//                            Log.d("date", date);
-//                            Log.d("medium", medium);
-//                            Log.d("country", country);
-//                            Log.d("description", description);
-//                            Log.d("year", year);
-                            save_artwork_in_array();
-
-                            save_artworks_in_list_view();
-
-
-                        }
-                        catch (Exception e)
-                        {
-                            Log.d("json error2", "failed to make json object or smthing like that idk");
-                        }
-
-                    }
-                    catch (IOException e)
-                    {
-                        Log.d("API error2", e.getMessage());
-                    }
-
-
-                }
-                else
-                {
-                    Log.d("fail3", response.message());
-                }
-            }
-        });
-
-
-    }
-
-
-
-    public void save_artwork_in_array()
-    {
-        //	public Artwork
-        Artwork a = new Artwork(artist_name, title, country, year, medium, alt_text, description);
-        artwork_list.add(a);
-
-//        Log.d("ammount of artworks in artwork_list:", Integer.toString(artwork_list.size())); //WORKS
-
-//        Log.d("artwork info from save_artwork_in_array", a.toString());
-    }
-
-
-    public void call_api(String url)
-    {
-
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(url).build();
-
-
-
-        client.newCall(request).enqueue(new Callback()
-        {
-            @Override
-            public void onFailure(Call call, IOException e)
-            {
-                Log.d("fail1", "fail1");
-            }
-
-            @Override
-            public void onResponse(Call call, Response response)
-            {
-                if(response.isSuccessful())
-                {
-                    Log.d("succ", "response is succ");
-                    try
-                    {
-                        String res = response.body().string();
-//                        Log.d("res", res);
-                        try
-                        {
-
-                            JSONObject json = new JSONObject(res);
-                            JSONArray data = json.getJSONArray("data");
-//                            Log.d("data", data.toString());
-
-//                            Log.d("ammount of artworks", Integer.toString(data.length()));
-
-                            for (int i = 0; i < data.length(); i = i + 1)
-                            {
-                                String artwork_id = get_artwork_id(data.getJSONObject(i));
-
-                                String id_url = "https://api.artic.edu/api/v1/artworks/" + artwork_id;
-//                                Log.d(id_url, id_url);
-                                get_info_about_artwork(id_url);
-
-
-
-
-                            }
-
-
-
-
-
-
-                        }
-                        catch (Exception e)
-                        {
-                            Log.d("json error", "failed to make json object or smthing like that idk");
-                        }
-
-                    }
-                    catch (IOException e)
-                    {
-                        Log.d("API error", e.getMessage());
-                    }
-
-
-                }
-                else
-                {
-                    Log.d("fail2", response.message());
-                }
-            }
-        });
-
-
-
 
     }
 

@@ -27,6 +27,6 @@ public class Artwork
 	@Override
 	public String toString()
 	{
-		return this.artist_name + " " + this.title;
+		return "NAME:" + this.artist_name + " TITLE: " + this.title;
 	}
 }
