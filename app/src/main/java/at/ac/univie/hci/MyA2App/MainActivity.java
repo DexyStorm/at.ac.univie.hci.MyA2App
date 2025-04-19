@@ -37,6 +37,7 @@ import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -184,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void call_api_for_specific_id(String artwork_id)
+    private void call_api_for_specific_id(String artwork_id, CountDownLatch latch, ArrayList<Artwork> artworks)
     {
         String url = "https://api.artic.edu/api/v1/artworks/" + artwork_id;
 
@@ -196,24 +197,72 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call call, IOException e)
             {
+                latch.countDown();
                 Log.d("fail2", "fail2");
             }
 
 
             @Override
-            public void onResponse(Call call, Response response)
+            public void onResponse(Call call2, Response response2)
             {
+                latch.countDown();
 
-                if (response.isSuccessful())
+                if (response2.isSuccessful())
                 {
+
 
 
                     Log.d("succ2", "succ2");
 
                     try
                     {
-                        Thread.sleep(100);
+                        String res = response2.body().string();
+                        JSONObject response_as_json = new JSONObject(res);
+                        JSONObject artwork_data = response_as_json.getJSONObject("data");
 
+
+                        title = artwork_data.optString("title", "Untitled");
+                        if(title.equals("null"))
+                        {
+                            title = "Untitled";
+                        }
+                        artist_name = artwork_data.optString("artist_title", "Unknown Artist");
+                        if(artist_name.equals("null"))
+                        {
+                            artist_name = "Unknown Artist";
+                        }
+                        date = artwork_data.optString("date_display", "Unknown date");
+                        if(date.equals("null"))
+                        {
+                            date = "Unknown date";
+                        }
+                        medium = artwork_data.optString("medium_display", "Unknown medium");
+                        if(medium.equals("null"))
+                        {
+                            medium = "Unknown medium";
+                        }
+                        country = artwork_data.optString("place_of_origin", "Unknown origin");
+                        if(search_country.equals("null"))
+                        {
+                            country = "Unknown origin";
+                        }
+                        description = artwork_data.optString("description", "No Description");
+                        if(description.equals("null"))
+                        {
+                            description = "No Description";
+                        }
+                        year = artwork_data.optString("date_display", "Unknown year");
+                        if(year.equals("null"))
+                        {
+                            year = "Unknown year";
+                        }
+
+
+
+
+                        artworks.add(new Artwork(artist_name, title, country, year, medium, alt_text, description));
+
+//                        Log.d("ammount of artworks in 'artworks'", Integer.toString(artworks.size()));
                     }
                     catch (Exception e)
                     {
@@ -221,7 +270,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+
+
         });
+
+//        Log.d("ammount of artworks in 'artworks'", Integer.toString(artworks.size()));
     }
 
 
@@ -263,12 +316,32 @@ public class MainActivity extends AppCompatActivity {
 
                         ArrayList<String> artwork_ids = get_artwork_ids(data);
                         ArrayList<Artwork> artworks = new ArrayList<Artwork>();
+                        CountDownLatch latch = new CountDownLatch(artwork_ids.size());
                         for(String id : artwork_ids)
                         {
-                            call_api_for_specific_id(id);
+                            call_api_for_specific_id(id, latch, artworks);
                         }
 
 
+
+
+                        //makes sure that all the threads are finished before continuing
+                        new Thread(() ->
+                        {
+                            try
+                            {
+                                latch.await(); // Wait for all responses
+                                runOnUiThread(() ->
+                                {
+                                    // All data is ready here — update UI or do next steps
+                                    Log.d("amount of artworks: ", Integer.toString(artworks.size()));
+                                });
+                            }
+                            catch (InterruptedException e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }).start();
 
                     }
                     catch (IOException e)
@@ -338,7 +411,10 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d("url", url);
 
         call_api(url);
-        
+
+
+
+
 
     }
 

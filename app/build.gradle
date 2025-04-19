@@ -28,7 +28,8 @@ android {
     }
 }
 
-dependencies {
+dependencies 
+{
 
     implementation libs.appcompat
     implementation libs.material
@@ -39,4 +40,6 @@ dependencies {
     androidTestImplementation libs.espresso.core
 
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+
 }
