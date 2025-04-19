@@ -31,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -83,21 +84,36 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //only for search
     public String general_search = "";
+
+    //for filter
+    public String search_artist_name = "";
+    public String search_time_period_from = "";
+    public String search_time_period_to = "";
+    public String search_title = "";
+    public String search_country = "";
+    public String search_medium = "";
+
+
+
+    //for display
+    public ArrayList<Artwork> artwork_list = new ArrayList<>();
     public String artist_name = "";
     public String title = "";
-    public String country = "";
-    public String time_period_from = "";
-    public String time_period_to = "";
+    public String year = "";
     public String medium = "";
     public String alt_text = "";
     public String date = "";
     public String description = "";
+    public String country = "";
+
 
 
     public void search(boolean from_general)
     {
         String url = "https://api.artic.edu/api/v1/artworks";
+//        Log.d("url", url);
 
         if(from_general == true)
         {
@@ -108,29 +124,29 @@ public class MainActivity extends AppCompatActivity {
         {
             url = url + "/search";
 
-            if(!artist_name.isEmpty())
+            if(!search_artist_name.isEmpty())
             {
-                url = url + "?[term][artist_title]=" + artist_name + "&";
+                url = url + "?[term][artist_title]=" + search_artist_name + "&";
             }
-            if(!title.isEmpty())
+            if(!search_title.isEmpty())
             {
-                url = url + "?[term][title]=" + title + "&";
+                url = url + "?[term][title]=" + search_title + "&";
             }
-            if(!country.isEmpty())
+            if(!search_country.isEmpty())
             {
-                url = url + "?[term][title]=" + country + "&";
+                url = url + "?[term][title]=" + search_country + "&";
             }
-            if(!time_period_from.isEmpty())
+            if(!search_time_period_from.isEmpty())
             {
-                url = url + "?[term][title]=" + time_period_from + "&";
+                url = url + "?[term][title]=" + search_time_period_from + "&";
             }
-            if(!time_period_to.isEmpty())
+            if(!search_time_period_to.isEmpty())
             {
-                url = url + "?[term][title]=" + time_period_to + "&";
+                url = url + "?[term][title]=" + search_time_period_to + "&";
             }
-            if(!medium.isEmpty())
+            if(!search_medium.isEmpty())
             {
-                url = url + "?[term][title]=" + medium + "&";
+                url = url + "?[term][title]=" + search_medium + "&";
             }
 
             //removes last "&"
@@ -141,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-//        Log.d(url, url);
+        Log.d("url", url);
         call_api(url);
         
 
@@ -151,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
     public String get_artwork_id(JSONObject elem)
     {
         String id = elem.optString("id", "Untitled");
+//        Log.d("id", id);
         return id;
     }
 
@@ -181,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
 
                             JSONObject json = new JSONObject(res);
                             JSONObject artwork_data = json.getJSONObject("data");
-                            Log.d("artwork_data", artwork_data.toString());
+//                            Log.d("artwork_data", artwork_data.toString());
 
                             title = artwork_data.optString("title", "Untitled");
                             if(title.equals("null"))
@@ -204,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
                                 medium = "Unknown medium";
                             }
                             country = artwork_data.optString("place_of_origin", "Unknown origin");
-                            if(country.equals("null"))
+                            if(search_country.equals("null"))
                             {
                                 country = "Unknown origin";
                             }
@@ -213,13 +230,19 @@ public class MainActivity extends AppCompatActivity {
                             {
                                 description = "No Description";
                             }
+                            year = artwork_data.optString("date_display", "Unknown year");
+                            if(year.equals("null"))
+                            {
+                                year = "Unknown year";
+                            }
                             Log.d("title", title);
                             Log.d("artist_name", artist_name);
                             Log.d("date", date);
                             Log.d("medium", medium);
                             Log.d("country", country);
                             Log.d("description", description);
-
+                            Log.d("year", year);
+                            save_artwork_in_array();
 
 
                         }
@@ -248,7 +271,16 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    public void save_artwork_in_array()
+    {
+        //	public Artwork
+        Artwork a = new Artwork(artist_name, title, country, year, medium, alt_text, description);
+        artwork_list.add(a);
 
+//        Log.d("ammount of artworks in artwork_list:", Integer.toString(artwork_list.size())); //WORKS
+
+        Log.d("artwork info from save_artwork_in_array", a.toString());
+    }
 
 
     public void call_api(String url)
@@ -276,6 +308,7 @@ public class MainActivity extends AppCompatActivity {
                     try
                     {
                         String res = response.body().string();
+                        Log.d("res", res);
                         try
                         {
 
@@ -283,6 +316,7 @@ public class MainActivity extends AppCompatActivity {
                             JSONArray data = json.getJSONArray("data");
 //                            Log.d("data", data.toString());
 
+                            Log.d("ammount of artworks", Integer.toString(data.length()));
 
                             for (int i = 0; i < data.length(); i = i + 1)
                             {
@@ -294,11 +328,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                                //STOPPED HERE
-                                //SAVE RESPONSE IN LIST
 
                             }
 
+                            for (Artwork elem : artwork_list)
+                            {
+                                Log.d("artwork in artwork_list", elem.toString());
+                            }
 
 
 

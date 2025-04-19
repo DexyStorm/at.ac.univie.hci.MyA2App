@@ -48,10 +48,10 @@ public class FilterPopup
 		country_search.setText(activity.country);
 
 		EditText time_from_search = popup.findViewById(R.id.time_period_from_search);
-		time_from_search.setText(activity.time_period_from);
+		time_from_search.setText(activity.search_time_period_from);
 
 		EditText time_period_to_search = popup.findViewById(R.id.time_period_to_search);
-		time_period_to_search.setText(activity.time_period_to);
+		time_period_to_search.setText(activity.search_time_period_to);
 
 		EditText medium_search = popup.findViewById(R.id.medium_search);
 		medium_search.setText(activity.medium);
@@ -78,17 +78,17 @@ public class FilterPopup
 			public void onClick(View v)
 			{
 				EditText artist_search = popup.findViewById(R.id.artist_search);
-				activity.artist_name = artist_search.getText().toString();
+				activity.search_artist_name = artist_search.getText().toString();
 				EditText art_search = popup.findViewById(R.id.title_search);
-				activity.title = art_search.getText().toString();
+				activity.search_title = art_search.getText().toString();
 				EditText country_search = popup.findViewById(R.id.country_search);
-				activity.country = country_search.getText().toString();
+				activity.search_country = country_search.getText().toString();
 				EditText time_from_search = popup.findViewById(R.id.time_period_from_search);
-				activity.time_period_from = time_from_search.getText().toString();
+				activity.search_time_period_from = time_from_search.getText().toString();
 				EditText time_to_search = popup.findViewById(R.id.time_period_to_search);
-				activity.time_period_to = time_to_search.getText().toString();
+				activity.search_time_period_to = time_to_search.getText().toString();
 				EditText medium_search = popup.findViewById(R.id.medium_search);
-				activity.medium = medium_search.getText().toString();
+				activity.search_medium = medium_search.getText().toString();
 
 
 				InputMethodManager imm = (InputMethodManager)activity.getSystemService(activity.INPUT_METHOD_SERVICE);
@@ -125,11 +125,11 @@ public class FilterPopup
 
 				EditText time_from_search = popup.findViewById(R.id.time_period_from_search);
 				time_from_search.setText("");
-				activity.time_period_from = "";
+				activity.search_time_period_from = "";
 
 				EditText time_period_to_search = popup.findViewById(R.id.time_period_to_search);
 				time_period_to_search.setText("");
-				activity.time_period_to = "";
+				activity.search_time_period_to = "";
 
 				EditText medium_search = popup.findViewById(R.id.medium_search);
 				medium_search.setText("");
