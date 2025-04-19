@@ -251,12 +251,13 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.d("succ", "succ");
 
+                    res = response;
                     try
                     {
-                        res = response;
 
 
-                        JSONArray data = first_response_success(response.body().string());
+
+                        JSONArray data = first_response_success(res.body().string());
                         Log.d("data", data.toString()); //WORKS
                         Log.d("ammount of artworks", Integer.toString(data.length())); //WORKS
 
