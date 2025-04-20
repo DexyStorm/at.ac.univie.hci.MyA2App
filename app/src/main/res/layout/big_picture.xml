@@ -1,6 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="match_parent"
+	android:background="#D6D6D6">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="700dp"
+		android:layout_margin="16dp"
+		android:background="@drawable/popupbg"
+		android:orientation="vertical">
+
+		<ImageView
+			android:id="@+id/imageView2"
+			android:layout_width="350dp"
+			android:layout_height="300dp"
+			android:layout_marginStart="24dp"
+			android:layout_marginTop="24dp"
+			android:layout_marginEnd="24dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			tools:srcCompat="@tools:sample/avatars" />
+
+		<TextView
+			android:id="@+id/bp_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="24dp"
+			android:layout_marginTop="32dp"
+			android:text="Title"
+			android:textSize="18dp"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+		<TextView
+			android:id="@+id/bp_artist_name"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="32dp"
+			android:text="Artist"
+			android:textSize="18dp"
+			app:layout_constraintStart_toStartOf="@+id/bp_title"
+			app:layout_constraintTop_toBottomOf="@+id/bp_title" />
+
+		<TextView
+			android:id="@+id/bp_country"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="32dp"
+			android:text="Country"
+			android:textSize="18dp"
+			app:layout_constraintStart_toStartOf="@+id/bp_artist_name"
+			app:layout_constraintTop_toBottomOf="@+id/bp_artist_name" />
+
+		<TextView
+			android:id="@+id/bp_year"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="32dp"
+			android:text="Year"
+			android:textSize="18dp"
+			app:layout_constraintStart_toStartOf="@+id/bp_country"
+			app:layout_constraintTop_toBottomOf="@+id/bp_country" />
+
+		<TextView
+			android:id="@+id/bp_medium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="32dp"
+			android:text="Medium"
+			android:textSize="18dp"
+			app:layout_constraintStart_toStartOf="@+id/bp_year"
+			app:layout_constraintTop_toBottomOf="@+id/bp_year" />
+
+		<TextView
+			android:id="@+id/bp_description"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="32dp"
+			android:text="Text"
+			android:textSize="18dp"
+			app:layout_constraintStart_toStartOf="@+id/bp_medium"
+			app:layout_constraintTop_toBottomOf="@+id/bp_medium" />
+
+		<ImageView
+			android:id="@+id/bp_icon_title"
+			android:layout_width="30dp"
+			android:layout_height="24dp"
+			android:layout_marginStart="48dp"
+			app:layout_constraintBottom_toBottomOf="@+id/bp_title"
+			app:layout_constraintStart_toEndOf="@+id/bp_title"
+			app:layout_constraintTop_toTopOf="@+id/bp_title"
+			app:srcCompat="@drawable/title" />
+
+		<ImageView
+			android:id="@+id/imageView4"
+			android:layout_width="30dp"
+			android:layout_height="24dp"
+
+			app:layout_constraintBottom_toBottomOf="@+id/bp_artist_name"
+			app:layout_constraintEnd_toEndOf="@+id/bp_icon_title"
+			app:layout_constraintStart_toStartOf="@+id/bp_icon_title"
+			app:layout_constraintTop_toTopOf="@+id/bp_artist_name"
+			app:srcCompat="@drawable/artist" />
+
+		<ImageView
+			android:id="@+id/imageView5"
+			android:layout_width="30dp"
+			android:layout_height="24dp"
+			app:layout_constraintBottom_toBottomOf="@+id/bp_year"
+			app:layout_constraintEnd_toEndOf="@+id/imageView6"
+			app:layout_constraintStart_toStartOf="@+id/imageView6"
+			app:layout_constraintTop_toTopOf="@+id/bp_year"
+			app:srcCompat="@drawable/country_icon" />
+
+		<ImageView
+			android:id="@+id/imageView6"
+			android:layout_width="30dp"
+			android:layout_height="24dp"
+
+			app:layout_constraintBottom_toBottomOf="@+id/bp_country"
+			app:layout_constraintEnd_toEndOf="@+id/imageView4"
+			app:layout_constraintStart_toStartOf="@+id/imageView4"
+			app:layout_constraintTop_toTopOf="@+id/bp_country"
+			app:srcCompat="@drawable/calendar_icon" />
+
+		<ImageView
+			android:id="@+id/imageView7"
+			android:layout_width="30dp"
+			android:layout_height="24dp"
+			app:layout_constraintBottom_toBottomOf="@+id/bp_medium"
+			app:layout_constraintEnd_toEndOf="@+id/imageView5"
+			app:layout_constraintStart_toStartOf="@+id/imageView5"
+			app:layout_constraintTop_toTopOf="@+id/bp_medium"
+			app:srcCompat="@drawable/medium" />
+
+		<ImageView
+			android:id="@+id/imageView8"
+			android:layout_width="30dp"
+			android:layout_height="24dp"
+			app:layout_constraintBottom_toBottomOf="@+id/bp_description"
+			app:layout_constraintEnd_toEndOf="@+id/imageView7"
+			app:layout_constraintStart_toStartOf="@+id/imageView7"
+			app:layout_constraintTop_toTopOf="@+id/bp_description"
+			app:srcCompat="@drawable/text" />
+
+		<TextView
+			android:textSize="18dp"
+			android:id="@+id/bp_title_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="24dp"
+			android:text="Untitled"
+			app:layout_constraintBottom_toBottomOf="@+id/bp_icon_title"
+			app:layout_constraintStart_toEndOf="@+id/bp_icon_title"
+			app:layout_constraintTop_toTopOf="@+id/bp_icon_title" />
+
+		<TextView
+			android:textSize="18dp"
+			android:id="@+id/bp_artist_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="24dp"
+			android:text="Unknown Artist"
+			app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+			app:layout_constraintStart_toEndOf="@+id/imageView4"
+			app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+		<TextView
+			android:textSize="18dp"
+			android:id="@+id/bp_cuontry_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="24dp"
+			android:text="Unknown Country"
+			app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+			app:layout_constraintStart_toEndOf="@+id/imageView6"
+			app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+		<TextView
+			android:textSize="18dp"
+			android:id="@+id/bp_country_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="24dp"
+			android:text="Unknown Year"
+			app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+			app:layout_constraintStart_toEndOf="@+id/imageView5"
+			app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+		<TextView
+			android:textSize="18dp"
+			android:id="@+id/textView19"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="24dp"
+			android:text="Unknown Medium"
+			app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+			app:layout_constraintStart_toEndOf="@+id/imageView7"
+			app:layout_constraintTop_toTopOf="@+id/imageView7" />
+
+		<TextView
+			android:textSize="18dp"
+			android:id="@+id/bp_text_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="24dp"
+			android:text="No Description"
+			app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+			app:layout_constraintStart_toEndOf="@+id/imageView8"
+			app:layout_constraintTop_toTopOf="@+id/imageView8" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

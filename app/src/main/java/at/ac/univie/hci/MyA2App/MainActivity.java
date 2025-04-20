@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+    public String image_id = "";
     Response res;
 
 
@@ -212,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                    Log.d("succ2", "succ2");
+//                    Log.d("succ2", "succ2");
 
                     try
                     {
@@ -256,7 +257,12 @@ public class MainActivity extends AppCompatActivity {
                         {
                             year = "Unknown year";
                         }
-
+                        image_id = artwork_data.optString("image_id", "ERROR_NO_IMAGE_ID");
+                        if(image_id.equals("null"))
+                        {
+                            image_id = "ERROR_NO_IMAGE_ID";
+                        }
+                        Log.d("image_id: ", image_id);
 
 
 
@@ -311,8 +317,8 @@ public class MainActivity extends AppCompatActivity {
 
 
                         JSONArray data = first_response_success(res.body().string());
-                        Log.d("data", data.toString()); //WORKS
-                        Log.d("ammount of artworks", Integer.toString(data.length())); //WORKS
+//                        Log.d("data", data.toString()); //WORKS
+//                        Log.d("ammount of artworks", Integer.toString(data.length())); //WORKS
 
                         ArrayList<String> artwork_ids = get_artwork_ids(data);
                         ArrayList<Artwork> artworks = new ArrayList<Artwork>();
@@ -331,10 +337,17 @@ public class MainActivity extends AppCompatActivity {
                             try
                             {
                                 latch.await(); // Wait for all responses
+
+                                //small sleep buffer
+                                //idk y. shouldnt be needed but java is a piece garbage so yea
+                                Random rand = new Random();
+                                int random_number = rand.nextInt(500);
+                                Thread.sleep(random_number);
                                 runOnUiThread(() ->
                                 {
                                     // All data is ready here — update UI or do next steps
                                     Log.d("amount of artworks: ", Integer.toString(artworks.size()));
+                                    Log.d("arworks:", artworks.toString());
                                 });
                             }
                             catch (InterruptedException e)
