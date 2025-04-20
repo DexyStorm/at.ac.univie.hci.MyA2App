@@ -29,12 +29,12 @@
 			android:id="@+id/bp_title"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="24dp"
+			android:layout_marginStart="32dp"
 			android:layout_marginTop="32dp"
 			android:text="Title"
 			android:textSize="18dp"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+			app:layout_constraintTop_toBottomOf="@+id/artwork_image" />
 
 		<TextView
 			android:id="@+id/bp_artist_name"
