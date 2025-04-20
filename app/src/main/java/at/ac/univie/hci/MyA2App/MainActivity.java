@@ -35,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -316,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
                 if(response.isSuccessful())
                 {
 
-                    Log.d("succ", "succ");
+//                    Log.d("succ", "succ");
 
                     res = response;
                     try
@@ -435,11 +436,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
     }
+
+
 
     public void search(boolean from_general)
     {
@@ -448,36 +447,100 @@ public class MainActivity extends AppCompatActivity {
 
         if(from_general == true)
         {
-            url = url + "/search?q=" + general_search;
+            String formated_general_search = "";
+            try
+            {
+                formated_general_search = URLEncoder.encode(general_search, "UTF-8");
+            }
+            catch (Exception e)
+            {
+                throw new RuntimeException(e);
+            }
+            url = url + "/search?q=" + formated_general_search;
 
         }
         else //from_general == false
         {
-            url = url + "/search";
+
+            url = url + "/search?";
 
             if(!search_artist_name.isEmpty())
             {
-                url = url + "?[term][artist_title]=" + search_artist_name + "&";
+                String formated_search_artist_name = "";
+                try
+                {
+                    formated_search_artist_name = URLEncoder.encode(search_artist_name, "UTF-8");
+                }
+                catch (Exception e)
+                {
+                    throw new RuntimeException(e);
+                }
+                url = url + "query[term][artist_title]=" + formated_search_artist_name + "&";
             }
             if(!search_title.isEmpty())
             {
-                url = url + "?[term][title]=" + search_title + "&";
+                String formated_search_title = "";
+                try
+                {
+                    formated_search_title = URLEncoder.encode(search_title, "UTF-8");
+                }
+                catch (Exception e)
+                {
+                    throw new RuntimeException(e);
+                }
+                url = url + "query[term][title]=" + formated_search_title + "&";
             }
             if(!search_country.isEmpty())
             {
-                url = url + "?[term][title]=" + search_country + "&";
+                String formated_search_country = "";
+                try
+                {
+                    formated_search_country = URLEncoder.encode(search_country, "UTF-8");
+                }
+                catch (Exception e)
+                {
+                    throw new RuntimeException(e);
+                }
+                url = url + "query[term][place_of_origin]=" + formated_search_country + "&";
             }
             if(!search_time_period_from.isEmpty())
             {
-                url = url + "?[term][title]=" + search_time_period_from + "&";
+                String formated_search_time_period_from = "";
+                try
+                {
+                    formated_search_time_period_from = URLEncoder.encode(search_time_period_from, "UTF-8");
+                }
+                catch (Exception e)
+                {
+                    throw new RuntimeException(e);
+                }
+                url = url + "query[term][date_start][gte]=" + formated_search_time_period_from + "&";
             }
             if(!search_time_period_to.isEmpty())
             {
-                url = url + "?[term][title]=" + search_time_period_to + "&";
+                String formated_search_time_period_to = "";
+                try
+                {
+                    formated_search_time_period_to = URLEncoder.encode(search_time_period_to, "UTF-8");
+                }
+                catch (Exception e)
+                {
+                    throw new RuntimeException(e);
+                }
+                url = url + "query[term][date_end][lte]=" + formated_search_time_period_to + "&";
             }
             if(!search_medium.isEmpty())
             {
-                url = url + "?[term][title]=" + search_medium + "&";
+                String formated_search_medium = "";
+                try
+                {
+                    formated_search_medium = URLEncoder.encode(search_medium, "UTF-8");
+                }
+                catch (Exception e)
+                {
+                    throw new RuntimeException(e);
+                }
+                url = url + "query[term][medium_display]=" + formated_search_medium + "&";
             }
 
             //removes last "&"
@@ -490,8 +553,11 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+
+
+
         url = url + "&limit=100";
-//        Log.d("url", url);
+        Log.d("url", url);
 
         call_api(url);
 
