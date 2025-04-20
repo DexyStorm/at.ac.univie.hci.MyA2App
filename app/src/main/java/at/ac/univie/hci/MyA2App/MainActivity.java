@@ -545,6 +545,7 @@ public class MainActivity extends AppCompatActivity {
 
             if(!search_medium.isEmpty())
             {
+
                 String formated_search_medium = "";
                 try
                 {
@@ -555,16 +556,17 @@ public class MainActivity extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
                 url = url + "query[term][medium_display]=" + formated_search_medium + "&";
+//                url.replace("/search?", "/search?q=");
             }
 
 
             url = url.toLowerCase(); //HOLY SHIT THIS FIXED IT IM GETTING CANCER
             //removes last "&"
-//            if(url.substring(url.length() - 1).equals("&"))
-//            {
-//                url = url.substring(0, url.length() - 1);
-//
-//            }
+            if(url.substring(url.length() - 1).equals("&"))
+            {
+                url = url.substring(0, url.length() - 1);
+
+            }
 
 
         }
@@ -572,7 +574,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        url = url + "limit=100";
+        url = url + "&limit=100";
 
         Log.d("url", url);
 
