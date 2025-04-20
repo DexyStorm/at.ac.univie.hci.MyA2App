@@ -40,7 +40,7 @@
 			android:id="@+id/bp_artist_name"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="32dp"
+			android:layout_marginTop="24dp"
 			android:text="Artist"
 			android:textSize="18dp"
 			app:layout_constraintStart_toStartOf="@+id/bp_title"
@@ -50,7 +50,7 @@
 			android:id="@+id/bp_country"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="32dp"
+			android:layout_marginTop="24dp"
 			android:text="Country"
 			android:textSize="18dp"
 			app:layout_constraintStart_toStartOf="@+id/bp_artist_name"
@@ -60,7 +60,7 @@
 			android:id="@+id/bp_year"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="32dp"
+			android:layout_marginTop="24dp"
 			android:text="Year"
 			android:textSize="18dp"
 			app:layout_constraintStart_toStartOf="@+id/bp_country"
@@ -70,7 +70,7 @@
 			android:id="@+id/bp_medium"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="32dp"
+			android:layout_marginTop="24dp"
 			android:text="Medium"
 			android:textSize="18dp"
 			app:layout_constraintStart_toStartOf="@+id/bp_year"
@@ -80,7 +80,7 @@
 			android:id="@+id/bp_description"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="32dp"
+			android:layout_marginTop="24dp"
 			android:text="Text"
 			android:textSize="18dp"
 			app:layout_constraintStart_toStartOf="@+id/bp_medium"
@@ -89,8 +89,8 @@
 		<ImageView
 			android:id="@+id/title_icon"
 			android:layout_width="30dp"
-			android:layout_height="24dp"
-			android:layout_marginStart="48dp"
+			android:layout_height="30dp"
+			android:layout_marginStart="55dp"
 			app:layout_constraintBottom_toBottomOf="@+id/bp_title"
 			app:layout_constraintStart_toEndOf="@+id/bp_title"
 			app:layout_constraintTop_toTopOf="@+id/bp_title"
@@ -149,70 +149,95 @@
 			app:srcCompat="@drawable/text" />
 
 		<TextView
-			android:textSize="18dp"
 			android:id="@+id/bp_title_text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="24dp"
+			android:layout_marginStart="20dp"
 			android:text="Untitled"
-			app:layout_constraintBottom_toBottomOf="@+id/title_icon"
+			android:textSize="18dp"
 			app:layout_constraintStart_toEndOf="@+id/title_icon"
 			app:layout_constraintTop_toTopOf="@+id/title_icon" />
 
 		<TextView
-			android:textSize="18dp"
 			android:id="@+id/bp_artist_text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="24dp"
+			android:layout_marginStart="20dp"
 			android:text="Unknown Artist"
-			app:layout_constraintBottom_toBottomOf="@+id/artist_icon"
+			android:textSize="18dp"
 			app:layout_constraintStart_toEndOf="@+id/artist_icon"
 			app:layout_constraintTop_toTopOf="@+id/artist_icon" />
 
 		<TextView
-			android:textSize="18dp"
 			android:id="@+id/bp_country_text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="24dp"
+			android:layout_marginStart="20dp"
 			android:text="Unknown Country"
-			app:layout_constraintBottom_toBottomOf="@+id/year_icon"
-			app:layout_constraintStart_toEndOf="@+id/year_icon"
-			app:layout_constraintTop_toTopOf="@+id/year_icon" />
-
-		<TextView
 			android:textSize="18dp"
-			android:id="@+id/bp_year_text"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="24dp"
-			android:text="Unknown Year"
-			app:layout_constraintBottom_toBottomOf="@+id/country_icon"
 			app:layout_constraintStart_toEndOf="@+id/country_icon"
 			app:layout_constraintTop_toTopOf="@+id/country_icon" />
 
 		<TextView
+			android:id="@+id/bp_year_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="20dp"
+			android:text="Unknown Year"
 			android:textSize="18dp"
+			app:layout_constraintStart_toEndOf="@+id/year_icon"
+			app:layout_constraintTop_toTopOf="@+id/year_icon" />
+
+		<TextView
 			android:id="@+id/bp_medium_text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="24dp"
+			android:layout_marginStart="20dp"
 			android:text="Unknown Medium"
-			app:layout_constraintBottom_toBottomOf="@+id/medium_icon"
+			android:textSize="18dp"
 			app:layout_constraintStart_toEndOf="@+id/medium_icon"
 			app:layout_constraintTop_toTopOf="@+id/medium_icon" />
 
 		<TextView
-			android:textSize="18dp"
 			android:id="@+id/bp_text_text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="24dp"
+			android:layout_marginStart="20dp"
 			android:text="No Description"
-			app:layout_constraintBottom_toBottomOf="@+id/text_icon"
+			android:textSize="18dp"
 			app:layout_constraintStart_toEndOf="@+id/text_icon"
 			app:layout_constraintTop_toTopOf="@+id/text_icon" />
+
+		<TextView
+			android:textSize="18dp"
+			android:id="@+id/bp_dimension"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="24dp"
+			android:text="Dimension"
+			app:layout_constraintStart_toStartOf="@+id/bp_description"
+			app:layout_constraintTop_toBottomOf="@+id/bp_description" />
+
+		<ImageView
+			android:id="@+id/dimension_icon"
+			android:layout_width="30dp"
+			android:layout_height="24dp"
+			app:layout_constraintBottom_toBottomOf="@+id/bp_dimension"
+			app:layout_constraintEnd_toEndOf="@+id/text_icon"
+			app:layout_constraintStart_toStartOf="@+id/text_icon"
+			app:layout_constraintTop_toTopOf="@+id/bp_dimension"
+			app:srcCompat="@drawable/dimensions" />
+
+		<TextView
+			android:textSize="18dp"
+			android:id="@+id/pb_dimension_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="20dp"
+			android:text="TextView"
+			app:layout_constraintBottom_toBottomOf="@+id/dimension_icon"
+			app:layout_constraintStart_toEndOf="@+id/dimension_icon"
+			app:layout_constraintTop_toTopOf="@+id/dimension_icon" />
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 
