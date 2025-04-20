@@ -49,7 +49,7 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="@+id/general_search"
             app:layout_constraintTop_toTopOf="@+id/general_search"
-            app:srcCompat="@drawable/magnifying_glass" />
+            app:srcCompat="@drawable/magnifying_glass_black" />
 
         <ListView
             android:layout_width="wrap_content"
