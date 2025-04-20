@@ -35,7 +35,7 @@ public class ArtworkAdapter extends ArrayAdapter<Artwork>
 	{
 		if (convertView == null)
 		{
-			convertView = LayoutInflater.from(context).inflate(R.layout.big_picture, parent, false);
+			convertView = LayoutInflater.from(context).inflate(R.layout.list_entry, parent, false);
 		}
 
 		Artwork artwork = artworks.get(position);

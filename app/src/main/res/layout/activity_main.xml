@@ -58,6 +58,8 @@
             android:id="@+id/artwork_listview"
             app:layout_constraintEnd_toEndOf="@+id/divider"
             app:layout_constraintStart_toStartOf="@+id/divider"
+            android:paddingBottom="100dp"
+            android:clipToPadding="false"
             app:layout_constraintTop_toBottomOf="@+id/divider" />
 
         <View
