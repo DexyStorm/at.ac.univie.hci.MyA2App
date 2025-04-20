@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -62,7 +63,7 @@ public class FilterPopup
 
 		clear_button_clicked(popup, location);
 		go_button_clicked(popup, location);
-
+		back_button_clicked(popup, location);
 
 
 	}
@@ -104,10 +105,9 @@ public class FilterPopup
 	private void clear_button_clicked(View popup, View location)
 	{
 
-
-
 		Button clear_button = popup.findViewById(R.id.clear_button);
-		clear_button.setOnClickListener(new View.OnClickListener() {
+		clear_button.setOnClickListener(new View.OnClickListener()
+		{
 			@Override
 			public void onClick(View v)
 			{
@@ -144,4 +144,25 @@ public class FilterPopup
 			}
 		});
 	}
+
+
+
+	private void back_button_clicked(View popup, View location)
+	{
+		ImageButton back_button = popup.findViewById(R.id.popup_back_button);
+		back_button.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				InputMethodManager imm = (InputMethodManager)activity.getSystemService(activity.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(popup.getWindowToken(), 0);
+				filter_popup.dismiss();
+			}
+		});
+
+	}
+
+
+
 }

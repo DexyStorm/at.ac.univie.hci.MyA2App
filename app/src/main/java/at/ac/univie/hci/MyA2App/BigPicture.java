@@ -70,4 +70,11 @@ public class BigPicture extends AppCompatActivity
 
 
 	}
+
+	public void pb_back_button_clicked(android.view.View view)
+	{
+		finish();
+	}
+
+
 }
