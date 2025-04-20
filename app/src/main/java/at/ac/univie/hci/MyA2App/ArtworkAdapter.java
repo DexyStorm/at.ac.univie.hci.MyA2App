@@ -40,17 +40,21 @@ public class ArtworkAdapter extends ArrayAdapter<Artwork>
 
 		Artwork artwork = artworks.get(position);
 
-		TextView titleView = convertView.findViewById(R.id.bp_title_text);
-		TextView artistView = convertView.findViewById(R.id.bp_artist_text);
-		ImageView imageView = convertView.findViewById(R.id.artwork_image);
+		TextView title_view = convertView.findViewById(R.id.bp_title_text);
+		TextView artist_view = convertView.findViewById(R.id.bp_artist_text);
+		ImageView image_view = convertView.findViewById(R.id.artwork_image);
 
-		titleView.setText(artwork.title);
-		artistView.setText(artwork.artist_name);
+		title_view.setText(artwork.title);
+		artist_view.setText(artwork.artist_name);
 
 		// Image loading (replace this with real image URL logic)
 		String imageUrl = "https://www.artic.edu/iiif/2/" + artwork.image_id + "/full/843,/0/default.jpg";
-		Glide.with(context).load(imageUrl).into(imageView);
+		Glide.with(context).load(imageUrl).into(image_view);
 
 		return convertView;
 	}
+
+
+
+
 }
