@@ -463,6 +463,56 @@ public class MainActivity extends AppCompatActivity {
 
             url = url + "/search?";
 
+
+
+            String formated_search_time_period_from = "";
+            String formated_search_time_period_to = "";
+            if(!search_time_period_from.isEmpty())
+            {
+                try
+                {
+                    formated_search_time_period_from = URLEncoder.encode(search_time_period_from, "UTF-8");
+                }
+                catch (Exception e)
+                {
+                    throw new RuntimeException(e);
+                }
+            }
+            if(!search_time_period_to.isEmpty())
+            {
+                try
+                {
+                    formated_search_time_period_to = URLEncoder.encode(search_time_period_to, "UTF-8");
+                }
+                catch (Exception e)
+                {
+                    throw new RuntimeException(e);
+                }
+            }
+
+
+
+            //time shit
+            if(formated_search_time_period_from.equals("") == false && formated_search_time_period_to.equals("") == true)
+            {
+                url = url + "q=date_start:[" + formated_search_time_period_from + " TO *]+&";
+            }
+            if(formated_search_time_period_from.equals("") == true && formated_search_time_period_to.equals("") == false)
+            {
+                url = url + "q=date_start:[*" + " TO " + formated_search_time_period_to + "]&";
+            }
+            if(formated_search_time_period_from.equals("") == false && formated_search_time_period_to.equals("") == false)
+            {
+                url = url + "q=date_start:[" + formated_search_time_period_from + " TO " + formated_search_time_period_to + "]&";
+            }
+            if(formated_search_time_period_from.equals("") == true && formated_search_time_period_to.equals("") == true)
+            {
+                url = url + "&";
+            }
+
+
+
+
             if(!search_artist_name.isEmpty())
             {
                 String formated_search_artist_name = "";
@@ -490,32 +540,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 url = url + "query[term][place_of_origin]=" + formated_search_country + "&";
             }
-            if(!search_time_period_from.isEmpty())
-            {
-                String formated_search_time_period_from = "";
-                try
-                {
-                    formated_search_time_period_from = URLEncoder.encode(search_time_period_from, "UTF-8");
-                }
-                catch (Exception e)
-                {
-                    throw new RuntimeException(e);
-                }
-                url = url + "query[term][date_start][gte]=" + formated_search_time_period_from + "&";
-            }
-            if(!search_time_period_to.isEmpty())
-            {
-                String formated_search_time_period_to = "";
-                try
-                {
-                    formated_search_time_period_to = URLEncoder.encode(search_time_period_to, "UTF-8");
-                }
-                catch (Exception e)
-                {
-                    throw new RuntimeException(e);
-                }
-                url = url + "query[term][date_end][lte]=" + formated_search_time_period_to + "&";
-            }
+
+
+
             if(!search_medium.isEmpty())
             {
                 String formated_search_medium = "";
@@ -530,12 +557,14 @@ public class MainActivity extends AppCompatActivity {
                 url = url + "query[term][medium_display]=" + formated_search_medium + "&";
             }
 
-            //removes last "&"
-            if(url.substring(url.length() - 1).equals("&"))
-            {
-                url = url.substring(0, url.length() - 1);
 
-            }
+            url = url.toLowerCase(); //HOLY SHIT THIS FIXED IT IM GETTING CANCER
+            //removes last "&"
+//            if(url.substring(url.length() - 1).equals("&"))
+//            {
+//                url = url.substring(0, url.length() - 1);
+//
+//            }
 
 
         }
@@ -543,8 +572,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        url = url + "&limit=100";
-        url = url.toLowerCase(); //HOLY SHIT THIS FIXED IT IM GETTING CANCER
+        url = url + "limit=100";
+
         Log.d("url", url);
 
         call_api(url);
