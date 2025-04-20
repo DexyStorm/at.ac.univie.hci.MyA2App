@@ -1,5 +1,6 @@
 package at.ac.univie.hci.MyA2App;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -7,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -119,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
     public String date = "";
     public String description = "";
     public String country = "";
+    public String dimensions = "";
+
 
 
 
@@ -219,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
                         String res = response2.body().string();
                         JSONObject response_as_json = new JSONObject(res);
                         JSONObject artwork_data = response_as_json.getJSONObject("data");
+//                        Log.d("date", artwork_data.toString());
 
 
                         title = artwork_data.optString("title", "Untitled");
@@ -261,11 +266,15 @@ public class MainActivity extends AppCompatActivity {
                         {
                             image_id = "ERROR_NO_IMAGE_ID";
                         }
-//                        Log.d("image_id: ", image_id);
+                        dimensions = artwork_data.optString("dimensions", "ERROR_NO_IMAGE_ID");
+                        if(dimensions.equals("null"))
+                        {
+                            dimensions = "No Dimensions";
+                        }
 
 
 
-                        artworks.add(new Artwork(artist_name, title, country, year, medium, description, image_id));
+                        artworks.add(new Artwork(artist_name, title, country, year, medium, description, image_id, dimensions));
 
 //                        Log.d("ammount of artworks in 'artworks'", Integer.toString(artworks.size()));
                     }
@@ -356,6 +365,52 @@ public class MainActivity extends AppCompatActivity {
                                     ListView artwork_listview = findViewById(R.id.artwork_listview);
                                     ArtworkAdapter adapter = new ArtworkAdapter(MainActivity.this, artworks);
                                     artwork_listview.setAdapter(adapter);
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    //wenn man auf ein artwork in der liste draufclickt
+                                    ArtworkAdapter adaptor = new ArtworkAdapter(MainActivity.this, artwork_list);
+                                    ListView list_view = findViewById(R.id.artwork_listview);
+
+                                    artwork_listview.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                                    {
+                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                                        {
+                                            Artwork selected_artwork = artworks.get(position);
+
+
+
+                                            Intent intent = new Intent(MainActivity.this, BigPicture.class);
+                                            intent.putExtra("image_url", "https://www.artic.edu/iiif/2/" + image_id + "/full/843,/0/default.jpg");
+                                            intent.putExtra("title", selected_artwork.title);
+                                            intent.putExtra("artist", selected_artwork.artist_name);
+                                            intent.putExtra("country", selected_artwork.country);
+                                            intent.putExtra("year", selected_artwork.year);
+                                            intent.putExtra("medium", selected_artwork.medium);
+                                            intent.putExtra("description", selected_artwork.description);
+                                            intent.putExtra("dimensions", selected_artwork.dimensions);
+                                        }
+                                    });
+
+
+
+
+
+
+
+
+
+
 
 
                                 });
