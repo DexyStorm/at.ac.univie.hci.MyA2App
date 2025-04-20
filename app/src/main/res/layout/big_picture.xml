@@ -8,7 +8,7 @@
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
-		android:layout_height="700dp"
+		android:layout_height="10000dp"
 		android:layout_margin="16dp"
 		android:background="@drawable/popupbg"
 		android:orientation="vertical">

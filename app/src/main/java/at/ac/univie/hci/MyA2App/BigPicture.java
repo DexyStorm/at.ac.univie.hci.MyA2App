@@ -11,6 +11,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
+
 public class BigPicture extends AppCompatActivity
 {
 	protected void onCreate(Bundle savedInstanceState)
@@ -22,13 +24,14 @@ public class BigPicture extends AppCompatActivity
 		setContentView(R.layout.big_picture);
 
 
-		ImageView imageView = findViewById(R.id.bp_artwork_image);
-		TextView titleView = findViewById(R.id.bp_title_text);
-		TextView artistView = findViewById(R.id.bp_artist_text);
-		TextView countryView = findViewById(R.id.bp_country_text);
-		TextView yearView = findViewById(R.id.bp_year_text);
-		TextView mediumView = findViewById(R.id.bp_medium_text);
-		TextView descView = findViewById(R.id.bp_description_text);
+		ImageView image_view = findViewById(R.id.bp_artwork_image);
+		TextView title_view = findViewById(R.id.bp_title_text);
+		TextView artist_view = findViewById(R.id.bp_artist_text);
+		TextView country_view = findViewById(R.id.bp_country_text);
+		TextView year_view = findViewById(R.id.bp_year_text);
+		TextView medium_view = findViewById(R.id.bp_medium_text);
+		TextView description_view = findViewById(R.id.bp_description_text);
+		TextView dimension_view = findViewById(R.id.pb_dimension_text);
 
 		Intent intent = getIntent();
 		String imageUrl = intent.getStringExtra("imageUrl");
@@ -38,10 +41,22 @@ public class BigPicture extends AppCompatActivity
 		String year = intent.getStringExtra("year");
 		String medium = intent.getStringExtra("medium");
 		String description = intent.getStringExtra("description");
+		String dimensions = intent.getStringExtra("dimensions");
 
 
 
-		Intent intent = getIntent();
+		Glide.with(this).load(imageUrl).into(image_view);
+
+		title_view.setText(title);
+		artist_view.setText(artist);
+		country_view.setText(country);
+		year_view.setText(year);
+		medium_view.setText(medium);
+		description_view.setText(description);
+		dimension_view.setText(dimensions);
+
+
+
 
 	}
 }
