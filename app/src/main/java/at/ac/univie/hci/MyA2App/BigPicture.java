@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.otaliastudios.zoom.ZoomImageView;
 
 public class BigPicture extends AppCompatActivity
 {
@@ -25,7 +26,7 @@ public class BigPicture extends AppCompatActivity
 		setContentView(R.layout.big_picture);
 
 
-		ImageView image_view = findViewById(R.id.bp_artwork_image);
+		ZoomImageView image_view = findViewById(R.id.bp_artwork_image);
 		TextView title_view = findViewById(R.id.bp_title_text);
 		TextView artist_view = findViewById(R.id.bp_artist_text);
 		TextView country_view = findViewById(R.id.bp_country_text);

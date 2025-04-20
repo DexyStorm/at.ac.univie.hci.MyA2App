@@ -13,7 +13,7 @@
 		android:background="@drawable/popupbg"
 		android:orientation="vertical">
 
-		<ImageView
+		<com.otaliastudios.zoom.ZoomImageView
 			android:id="@+id/bp_artwork_image"
 			android:layout_width="350dp"
 			android:layout_height="300dp"
