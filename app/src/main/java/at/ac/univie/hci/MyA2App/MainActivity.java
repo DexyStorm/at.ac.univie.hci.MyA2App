@@ -391,6 +391,8 @@ public class MainActivity extends AppCompatActivity {
 
 
                                             Intent intent = new Intent(MainActivity.this, BigPicture.class);
+                                            String image_url = "https://www.artic.edu/iiif/2/" + selected_artwork.image_id + "/full/843,/0/default.jpg";
+                                            Log.d("image_url from MainActivity.java", image_url);
                                             intent.putExtra("image_url", "https://www.artic.edu/iiif/2/" + selected_artwork.image_id + "/full/843,/0/default.jpg");
                                             intent.putExtra("title", selected_artwork.title);
                                             intent.putExtra("artist", selected_artwork.artist_name);

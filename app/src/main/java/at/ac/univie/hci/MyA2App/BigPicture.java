@@ -2,6 +2,7 @@ package at.ac.univie.hci.MyA2App;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +35,16 @@ public class BigPicture extends AppCompatActivity
 		TextView dimension_view = findViewById(R.id.pb_dimension_text);
 
 		Intent intent = getIntent();
-		String imageUrl = intent.getStringExtra("imageUrl");
+		String image_url = intent.getStringExtra("image_url");
+		if(image_url == null)
+		{
+			Log.d("NO IMAGE", "NO_IMAGE");
+		}
+		else
+		{
+			Log.d("image_url in BP", image_url.toString());
+		}
+
 		String title = intent.getStringExtra("title");
 		String artist = intent.getStringExtra("artist");
 		String country = intent.getStringExtra("country");
@@ -45,7 +55,7 @@ public class BigPicture extends AppCompatActivity
 
 
 
-		Glide.with(this).load(imageUrl).into(image_view);
+		Glide.with(this).load(image_url).into(image_view);
 
 		title_view.setText(title);
 		artist_view.setText(artist);
