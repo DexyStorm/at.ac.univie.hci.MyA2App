@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="400dp"
         android:layout_margin="16dp"
         android:background="@drawable/popupbg"
         android:orientation="vertical">
@@ -43,17 +43,6 @@
             android:layout_marginTop="42dp"
             android:ems="10"
             android:text="Country"
-            android:textSize="18dp"
-            app:layout_constraintStart_toStartOf="@+id/textView18"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="107dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="42dp"
-            android:ems="10"
-            android:text="Title"
             android:textSize="18dp"
             app:layout_constraintStart_toStartOf="@+id/artist_filter_text"
             app:layout_constraintTop_toBottomOf="@+id/artist_filter_text" />
@@ -135,23 +124,23 @@
             app:layout_constraintTop_toTopOf="@+id/textView13" />
 
         <EditText
-            android:inputType="text"
             android:id="@+id/medium_search"
             android:layout_width="209dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Digital"
+            android:inputType="text"
             app:layout_constraintBottom_toBottomOf="@+id/textView12"
             app:layout_constraintStart_toStartOf="@+id/time_period_from_search"
             app:layout_constraintTop_toTopOf="@+id/textView12" />
 
         <EditText
-            android:inputType="number"
             android:id="@+id/time_period_to_search"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="To"
+            android:inputType="number"
             app:layout_constraintEnd_toEndOf="@+id/country_search"
             app:layout_constraintTop_toTopOf="@+id/time_period_from_search" />
 
@@ -166,17 +155,6 @@
             android:text="Clear"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/title_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="The Scream"
-            android:inputType="text"
-            app:layout_constraintBottom_toBottomOf="@+id/textView18"
-            app:layout_constraintStart_toStartOf="@+id/artist_search"
-            app:layout_constraintTop_toTopOf="@+id/textView18" />
 
         <ImageButton
             android:id="@+id/popup_back_button"

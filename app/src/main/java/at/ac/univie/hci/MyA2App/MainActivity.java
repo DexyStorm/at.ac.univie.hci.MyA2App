@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
     public String search_artist_name = "";
     public String search_time_period_from = "";
     public String search_time_period_to = "";
-    public String search_title = "";
     public String search_country = "";
     public String search_medium = "";
 
@@ -477,19 +476,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 url = url + "query[term][artist_title]=" + formated_search_artist_name + "&";
             }
-            if(!search_title.isEmpty())
-            {
-                String formated_search_title = "";
-                try
-                {
-                    formated_search_title = URLEncoder.encode(search_title, "UTF-8");
-                }
-                catch (Exception e)
-                {
-                    throw new RuntimeException(e);
-                }
-                url = url + "query[term][title]=" + formated_search_title + "&";
-            }
+
             if(!search_country.isEmpty())
             {
                 String formated_search_country = "";

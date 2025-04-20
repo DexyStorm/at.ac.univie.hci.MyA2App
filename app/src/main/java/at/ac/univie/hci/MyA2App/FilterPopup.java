@@ -42,9 +42,6 @@ public class FilterPopup
 		EditText artist_search = popup.findViewById(R.id.artist_search);
 		artist_search.setText(activity.search_artist_name);
 
-		EditText art_search = popup.findViewById(R.id.title_search);
-		art_search.setText(activity.search_title);
-
 		EditText country_search = popup.findViewById(R.id.country_search);
 		country_search.setText(activity.search_country);
 
@@ -80,8 +77,6 @@ public class FilterPopup
 			{
 				EditText artist_search = popup.findViewById(R.id.artist_search);
 				activity.search_artist_name = artist_search.getText().toString();
-				EditText art_search = popup.findViewById(R.id.title_search);
-				activity.search_title = art_search.getText().toString();
 				EditText country_search = popup.findViewById(R.id.country_search);
 				activity.search_country = country_search.getText().toString();
 				EditText time_from_search = popup.findViewById(R.id.time_period_from_search);
@@ -114,10 +109,6 @@ public class FilterPopup
 				EditText artist_search = popup.findViewById(R.id.artist_search);
 				artist_search.setText("");
 				activity.artist_name = "";
-
-				EditText art_search = popup.findViewById(R.id.title_search);
-				art_search.setText("");
-				activity.title = "";
 
 				EditText country_search = popup.findViewById(R.id.country_search);
 				country_search.setText("");
