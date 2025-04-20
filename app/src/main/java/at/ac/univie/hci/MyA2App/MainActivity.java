@@ -262,11 +262,11 @@ public class MainActivity extends AppCompatActivity {
                         {
                             image_id = "ERROR_NO_IMAGE_ID";
                         }
-                        Log.d("image_id: ", image_id);
+//                        Log.d("image_id: ", image_id);
 
 
 
-                        artworks.add(new Artwork(artist_name, title, country, year, medium, alt_text, description));
+                        artworks.add(new Artwork(artist_name, title, country, year, medium, alt_text, description, image_id));
 
 //                        Log.d("ammount of artworks in 'artworks'", Integer.toString(artworks.size()));
                     }
@@ -346,8 +346,16 @@ public class MainActivity extends AppCompatActivity {
                                 runOnUiThread(() ->
                                 {
                                     // All data is ready here — update UI or do next steps
-                                    Log.d("amount of artworks: ", Integer.toString(artworks.size()));
-                                    Log.d("arworks:", artworks.toString());
+//                                    Log.d("amount of artworks: ", Integer.toString(artworks.size()));
+//                                    Log.d("arworks:", artworks.toString());
+//                                    for (Artwork elem : artworks)
+//                                    {
+//                                        Log.d("image_id: ", elem.image_id);
+//                                    }
+                                    //ALL OF THE ABOVE GARBAGE WORKS
+
+
+
                                 });
                             }
                             catch (InterruptedException e)

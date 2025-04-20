@@ -9,9 +9,10 @@ public class Artwork
 	public String alt_text = "";
 	public String description = "";
 	public String year = "";
+	public String image_id = "";
 
 
-	public Artwork(String artist_name, String title, String country, String year, String medium, String alt_text, String description)
+	public Artwork(String artist_name, String title, String country, String year, String medium, String alt_text, String description, String image_id)
 	{
 
 		this.artist_name = artist_name;
@@ -21,6 +22,7 @@ public class Artwork
 		this.medium = medium;
 		this.alt_text = alt_text;
 		this.description = description;
+		this.image_id = image_id;
 
 	}
 
