@@ -399,6 +399,9 @@ public class MainActivity extends AppCompatActivity {
                                             intent.putExtra("medium", selected_artwork.medium);
                                             intent.putExtra("description", selected_artwork.description);
                                             intent.putExtra("dimensions", selected_artwork.dimensions);
+
+                                            //might shit the bed
+                                            startActivity(intent);
                                         }
                                     });
 

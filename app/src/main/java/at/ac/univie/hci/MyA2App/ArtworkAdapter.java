@@ -40,9 +40,9 @@ public class ArtworkAdapter extends ArrayAdapter<Artwork>
 
 		Artwork artwork = artworks.get(position);
 
-		TextView title_view = convertView.findViewById(R.id.bp_title_text);
-		TextView artist_view = convertView.findViewById(R.id.bp_artist_text);
-		ImageView image_view = convertView.findViewById(R.id.artwork_image);
+		TextView title_view = convertView.findViewById(R.id.list_title_text);
+		TextView artist_view = convertView.findViewById(R.id.list_artist_text);
+		ImageView image_view = convertView.findViewById(R.id.list_artwork_image);
 
 		title_view.setText(artwork.title);
 		artist_view.setText(artwork.artist_name);
