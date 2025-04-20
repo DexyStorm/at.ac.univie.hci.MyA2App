@@ -544,6 +544,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         url = url + "&limit=100";
+        url = url.toLowerCase(); //HOLY SHIT THIS FIXED IT IM GETTING CANCER
         Log.d("url", url);
 
         call_api(url);
