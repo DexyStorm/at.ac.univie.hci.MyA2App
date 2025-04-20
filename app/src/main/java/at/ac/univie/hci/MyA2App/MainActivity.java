@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
     public String title = "";
     public String year = "";
     public String medium = "";
-    public String alt_text = "";
     public String date = "";
     public String description = "";
     public String country = "";
@@ -266,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                        artworks.add(new Artwork(artist_name, title, country, year, medium, alt_text, description, image_id));
+                        artworks.add(new Artwork(artist_name, title, country, year, medium, description, image_id));
 
 //                        Log.d("ammount of artworks in 'artworks'", Integer.toString(artworks.size()));
                     }
@@ -354,6 +353,9 @@ public class MainActivity extends AppCompatActivity {
 //                                    }
                                     //ALL OF THE ABOVE GARBAGE WORKS
 
+                                    ListView artwork_listview = findViewById(R.id.artwork_listview);
+                                    ArtworkAdapter adapter = new ArtworkAdapter(MainActivity.this, artworks);
+                                    artwork_listview.setAdapter(adapter);
 
 
                                 });

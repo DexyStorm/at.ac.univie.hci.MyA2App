@@ -14,7 +14,7 @@
 		android:orientation="vertical">
 
 		<ImageView
-			android:id="@+id/imageView2"
+			android:id="@+id/artwork_image"
 			android:layout_width="350dp"
 			android:layout_height="300dp"
 			android:layout_marginStart="24dp"
